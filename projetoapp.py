@@ -135,48 +135,37 @@ if selecionar == 'BTG':
         )
             ####        Mesclando arquivos e adicionando variaveis
 
-        # Filtros para adicionar operadores
+# Filtros para adicionar operadores
+
         #Filtro Breno
-        filtro = arquivo_final.VALOR<100000
-        filtro1 = arquivo_final.Operador == 'Edu'
-        
-        arquivo_filtro_breno = arquivo_final.loc[filtro&filtro1]
-        arquivo_filtro_breno['Operador'] = arquivo_filtro_breno['Operador'].str.replace('Edu','Breno')
+        filtro = (arquivo_final['VALOR']<100000) & (arquivo_final['Operador']=='Edu')
+        arquivo_final.loc[filtro,'Operador'] ='Breno'
+
         #Filtro Edu
-        filtro2 = arquivo_final.VALOR>100000
-        filtro3 = arquivo_final.Operador == 'Edu'
-        
-        arquivo_filtro_edu = arquivo_final.loc[filtro2&filtro3]
+
+        filtro2 =  filtro = (arquivo_final['VALOR']>100000) & (arquivo_final['Operador']=='Edu')
+        arquivo_final.loc[filtro2,'Operador'] = 'Edu'
+
         #filtro Bruno
-        filtro4 = arquivo_final.VALOR<100000
-        filtro5 = arquivo_final.Operador == 'Léo'
-        
-        arquivo_filtro_bruno = arquivo_final.loc[filtro4&filtro5]
-        arquivo_filtro_bruno['Operador'] = arquivo_filtro_bruno['Operador'].str.replace('Léo','Bruno')
-        #Filtro Léo
-        filtro6 = arquivo_final.VALOR>100000
-        filtro7 = arquivo_final.Operador == 'Léo'
-        
-        arquivo_filtro_leo = arquivo_final.loc[filtro6&filtro7]
 
-        lista_concat = [
-            arquivo_filtro_edu,
-            arquivo_filtro_bruno,
-            arquivo_filtro_breno,
-            arquivo_filtro_leo
-        ]
+        filtro4 = (arquivo_final['VALOR']<100000) & (arquivo_final['Operador']=='Léo')
+        arquivo_final.loc[filtro4,'Operador'] ='Bruno'
+        
+        # Filtro léo
+        filtro6  = (arquivo_final['VALOR']>100000) & (arquivo_final['Operador']=='Léo')
+        arquivo_final.loc[filtro6,'Operador'] = 'Léo'
 
-        def concat(lista):
-            df = pd.concat(lista)
-            return df
-        
-        arquivo_final2 = concat(lista_concat)
         
         
+        st.subheader('Este e o novo filtro')
+        
+        filtro_de_saldo = (arquivo_final['SALDO']>1000)
+        arquivo_final2 = arquivo_final.loc[filtro_de_saldo]
+    
+
         #### Criando funcao para alterar o nome dos operardores de acordo com criterios #### 
 
-
-        arquivo_final2['SALDO'].astype(int)
+        
         arquivo_final2 = arquivo_final2.reset_index()
         
         arquivo_final2 = arquivo_final2.sort_values(by='SALDO',ascending=False)
@@ -194,10 +183,8 @@ if selecionar == 'BTG':
         arquivo_final2 = arquivo_final2.rename(columns=
                                             {'Unnamed: 12':'Perfil da Carteira'})
         arquivo_final2 = arquivo_final2.iloc[:,[2,1,9,4,5,6,7,3,8]]
-        print(arquivo_final2.columns)
         #Alterações dia 25/10
     
-        print(arquivo_final.columns)
 
         ######### Manipulacao do streamlit ##############
         
@@ -219,7 +206,7 @@ if selecionar == 'BTG':
                                     height=500,
                                     num_rows='dynamic')
 
-
+    
         ########################################        GUIDE >>>>>>>>
 
 if selecionar == 'Guide':
@@ -361,44 +348,38 @@ if selecionar == 'Guide':
         segunda_juncao = juntar_arquivos(primeira_juncao,saldo)
 
 
-    
+                                # Filtros para adicionar operadores
+        
         # Filtros para adicionar operadores
-        #Filtro Breno
-        filtro = segunda_juncao.PL<100000
-        filtro1 = segunda_juncao.Operador == 'Edu'
-        
-        arquivo_filtro_breno = segunda_juncao.loc[filtro&filtro1]
-        arquivo_filtro_breno['Operador'] = arquivo_filtro_breno['Operador'].str.replace('Edu','Breno')
-        #Filtro Edu
-        filtro2 = segunda_juncao.PL>100000
-        filtro3 = segunda_juncao.Operador == 'Edu'
-        
-        arquivo_filtro_edu = segunda_juncao.loc[filtro2&filtro3]
-        #filtro Bruno
-        filtro4 = segunda_juncao.PL<100000
-        filtro5 = segunda_juncao.Operador == 'Léo'
-        
-        arquivo_filtro_bruno = segunda_juncao.loc[filtro4&filtro5]
-        arquivo_filtro_bruno['Operador'] = arquivo_filtro_bruno['Operador'].str.replace('Léo','Bruno')
-        #Filtro Léo
-        filtro6 = segunda_juncao.PL>100000
-        filtro7 = segunda_juncao.Operador == 'Léo'
-        
-        arquivo_filtro_lo = segunda_juncao.loc[filtro6&filtro7]
-        
-        #Juntando arquivos filtrados
-        def concatenando(dfs):
-            df=pd.concat(dfs)
-            return df
-        
-        filtrado_arquivo = [arquivo_filtro_bruno,
-                            arquivo_filtro_breno,
-                            arquivo_filtro_edu,
-                            arquivo_filtro_lo]
-        
-        arquivo_final = concatenando(filtrado_arquivo)
 
-        arquivo_final = arquivo_final[[
+        #Filtro Breno
+        filtro = (segunda_juncao['PL']<100000) & (segunda_juncao['Operador'] =='Edu')
+        segunda_juncao.loc[filtro,'Operador'] ='Breno'
+
+        #Filtro Edu
+
+        filtro2 =  filtro = (segunda_juncao['PL']>100000) & (segunda_juncao['Operador']=='Edu')
+        segunda_juncao.loc[filtro2,'Operador'] = 'Edu'
+
+        #filtro Bruno
+
+        filtro4 = (segunda_juncao['PL']<100000) & (segunda_juncao['Operador']=='Léo')
+        segunda_juncao.loc[filtro4,'Operador'] ='Bruno'
+        
+        # Filtro léo
+        filtro6  = (segunda_juncao['PL']>100000) & (segunda_juncao['Operador']=='Léo')
+        segunda_juncao.loc[filtro6,'Operador'] = 'Léo'
+
+        
+        
+        st.subheader('Este e o novo filtro')
+        
+        filtro_de_saldo = (segunda_juncao['Vl. Total']>1000)
+        terceira_juncao = segunda_juncao.loc[filtro_de_saldo]
+        
+        
+
+        terceira_juncao = terceira_juncao[[
             'Backoffice ',
             'Conta',
             'Unnamed: 11',
@@ -411,10 +392,10 @@ if selecionar == 'Guide':
         'Operador'
         ]]
 
-        arquivo_final = arquivo_final.sort_values(by='Saldo Previsto',ascending=False)
+        terceira_juncao = terceira_juncao.sort_values(by='Saldo Previsto',ascending=False)
     ######### Manipulacao do streamlit ##############
         
-        arquivo_final.insert(loc = 0,
+        terceira_juncao.insert(loc = 0,
                             column='Checkbox',
                             value=st.checkbox('arquivo_final'
                                             )
@@ -422,17 +403,18 @@ if selecionar == 'Guide':
 
 
         barra1 = st.selectbox('Selecione o Operador',
-                            options=arquivo_final['Operador'].unique())
+                            options=terceira_juncao['Operador'].unique())
 
-        df7 = arquivo_final.loc[arquivo_final['Operador'] == barra1]
-        df6 = arquivo_final['Operador'].value_counts()
+        df7 = terceira_juncao.loc[terceira_juncao['Operador'] == barra1]
+        df6 = terceira_juncao['Operador'].value_counts()
         
         data_frame_of = st.data_editor(df7,
                                     width=2000,
                                     height=500,
                                     num_rows='dynamic')
 
-
 else:
     st.header('')
+
+
 
