@@ -159,7 +159,7 @@ if selecionar == 'BTG':
         
         st.subheader('Este e o novo filtro')
         
-        filtro_de_saldo = (arquivo_final['SALDO']>1000)
+        filtro_de_saldo = ((arquivo_final['SALDO']>1000)|(arquivo_final['SALDO']<0))
         arquivo_final2 = arquivo_final.loc[filtro_de_saldo]
     
 
@@ -374,7 +374,7 @@ if selecionar == 'Guide':
         
         st.subheader('Este e o novo filtro')
         
-        filtro_de_saldo = (segunda_juncao['Vl. Total']>1000)
+        filtro_de_saldo = ((segunda_juncao['Vl. Total']>1000)|(segunda_juncao['Vl. Total']<0))
         terceira_juncao = segunda_juncao.loc[filtro_de_saldo]
         
         
