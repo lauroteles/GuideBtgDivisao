@@ -185,7 +185,7 @@ if selecionar == 'BTG':
         #>>>>17/11
         arquivo_final2 = arquivo_final2.rename(columns=
                                             {'Backoffice/ Mesa':'Status'})
-        arquivo_final2 = arquivo_final2.iloc[:,[2,1,9,4,5,6,7,3,8]]
+        arquivo_final2 = arquivo_final2.iloc[:,[2,1,10,4,5,6,7,3,8,9]]
         #Alterações dia 25/10
     
 
