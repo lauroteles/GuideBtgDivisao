@@ -94,7 +94,7 @@ if selecionar == 'BTG':
         saldo = saldo.drop(columns='NOME')
 
         
-        controle =  controle.iloc[:,[1,2,6,12,16,17,18]]
+        controle =  controle.iloc[:,[1,2,6,7,12,16,17,18]]
         
         
         controle = controle.rename(columns = {'Unnamed: 2':'CONTA'})
