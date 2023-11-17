@@ -182,6 +182,9 @@ if selecionar == 'BTG':
         #>>>>25/10
         arquivo_final2 = arquivo_final2.rename(columns=
                                             {'Unnamed: 12':'Perfil da Carteira'})
+        #>>>>17/11
+        arquivo_final2 = arquivo_final2.rename(columns=
+                                            {'Backoffice/ Mesa':'Status'})
         arquivo_final2 = arquivo_final2.iloc[:,[2,1,9,4,5,6,7,3,8]]
         #Alterações dia 25/10
     
